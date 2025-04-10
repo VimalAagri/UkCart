@@ -1,3 +1,8 @@
+<?php
+session_start();
+include './includes/db.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +21,7 @@
 
 <!-- Header -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
+  <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img src="logo.jpg" alt="ukCart Logo" 
            class="rounded shadow" 
@@ -28,12 +33,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="./index.php">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="./pages/shop.php">Shop</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Cart</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="./pages/cart.php">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="./pages/login.php">Login</a></li>
       </ul>
     </div>
+    <a class="btn btn-info ms-5" href="./pages/registration.php">Register</a>
   </div>
 </nav>
 
@@ -182,355 +188,44 @@
 </section>
 
 
+<script>
+  function addToCart(name, price, image) {
+    const product = {
+      name: name,
+      price: price,
+      image: image
+    };
+    localStorage.setItem('cartProduct', JSON.stringify(product));
+  }
+</script>
 
-<!-- Trending Products -->
+<?php
+$sql = "SELECT * FROM tranding_products";
+$result = mysqli_query($conn, $sql);
+?>
+
+<!-- Trending Products Section -->
 <div class="container py-5">
   <h2 class="mb-4 text-center">🔥 Trending Products</h2>
   <div class="row g-4">
+    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100">
+        <img src="./images/trending_products/<?= $row['product_image'] ?>" class="card-img-top" alt="<?= $row['product_name'] ?>" style="height: 200px; object-fit: cover;">
 
-    <!-- Product 1 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-        <img src="./images/trending-products/product1.jpg"  class="card-img-top" alt="Product 1">
-        <div class="card-body">
-          <h6 class="card-title">Pichhora</h6>
-          <p class="text-success fw-bold">₹299</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
+          <div class="card-body">
+            <h5 class="card-title"><?= $row['product_name'] ?></h5>
+            <p class="text-success fw-bold">₹<?= $row['product_price'] ?></p>
+            <p class="card-text" style="font-size: 0.9rem;"><?= $row['product_description'] ?></p>
+            <a href="./pages/cart.php" class="btn btn-sm btn-primary"
+               onclick="addToCart('<?= $row['product_name'] ?>', <?= $row['product_price'] ?>, './images/trending_products/<?= $row['product_image'] ?>')">Buy Now</a>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- Product 2 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product2.jpg" class="card-img-top" alt="Product 2">
-        <div class="card-body">
-          <h6 class="card-title">Uttarakhand Dress</h6>
-          <p class="text-success fw-bold">₹799</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 3 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product3.jpg" class="card-img-top" alt="Product 3">
-        <div class="card-body">
-          <h6 class="card-title">Traditional Shawl</h6>
-          <p class="text-success fw-bold">₹999</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 4 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product4.webp" class="card-img-top" alt="Product 4">
-        <div class="card-body">
-          <h6 class="card-title">Organic Pulses</h6>
-          <p class="text-success fw-bold">₹129</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 5 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product5.webp" class="card-img-top" alt="Product 5">
-        <div class="card-body">
-          <h6 class="card-title">Decorative Art</h6>
-          <p class="text-success fw-bold">₹459</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 6 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product6.jpg" class="card-img-top" alt="Product 6">
-        <div class="card-body">
-          <h6 class="card-title">Jute Bag</h6>
-          <p class="text-success fw-bold">₹349</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 7 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product7.webp" class="card-img-top" alt="Product 7">
-        <div class="card-body">
-          <h6 class="card-title">Woolen Socks</h6>
-          <p class="text-success fw-bold">₹149</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 8 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product8.jpg" class="card-img-top" alt="Product 8">
-        <div class="card-body">
-          <h6 class="card-title">Bamboo Basket</h6>
-          <p class="text-success fw-bold">₹279</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 9 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product9.jpg" class="card-img-top" alt="Product 9">
-        <div class="card-body">
-          <h6 class="card-title">Copper Bottle</h6>
-          <p class="text-success fw-bold">₹599</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 10 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product10.jpg" class="card-img-top" alt="Product 10">
-        <div class="card-body">
-          <h6 class="card-title">Organic Tea</h6>
-          <p class="text-success fw-bold">₹199</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Product 11 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product11.jpg" class="card-img-top" alt="Product 1">
-        <div class="card-body">
-          <h6 class="card-title">Organic Honey</h6>
-          <p class="text-success fw-bold">₹299</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 12 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product12.jpg" class="card-img-top" alt="Product 2">
-        <div class="card-body">
-          <h6 class="card-title">Wooden Handicraft</h6>
-          <p class="text-success fw-bold">₹799</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 13 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product13.jpg" class="card-img-top" alt="Product 3">
-        <div class="card-body">
-          <h6 class="card-title">Traditional Shawl</h6>
-          <p class="text-success fw-bold">₹999</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 14 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product14.jpg" class="card-img-top" alt="Product 4">
-        <div class="card-body">
-          <h6 class="card-title">Organic Pulses</h6>
-          <p class="text-success fw-bold">₹129</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 15 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product15.webp" class="card-img-top" alt="Product 5">
-        <div class="card-body">
-          <h6 class="card-title">Decorative Art</h6>
-          <p class="text-success fw-bold">₹459</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 16 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product16.jpg" class="card-img-top" alt="Product 6">
-        <div class="card-body">
-          <h6 class="card-title">Jute Bag</h6>
-          <p class="text-success fw-bold">₹349</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 17 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product17.webp" class="card-img-top" alt="Product 7">
-        <div class="card-body">
-          <h6 class="card-title">Woolen Socks</h6>
-          <p class="text-success fw-bold">₹149</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 18 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product18.jpg" class="card-img-top" alt="Product 8">
-        <div class="card-body">
-          <h6 class="card-title">Bamboo Basket</h6>
-          <p class="text-success fw-bold">₹279</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 19 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product19.jpg" class="card-img-top" alt="Product 9">
-        <div class="card-body">
-          <h6 class="card-title">Copper Bottle</h6>
-          <p class="text-success fw-bold">₹599</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 20 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product20.jpg" class="card-img-top" alt="Product 10">
-        <div class="card-body">
-          <h6 class="card-title">Organic Tea</h6>
-          <p class="text-success fw-bold">₹199</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-
-     <!-- Product 21 -->
-     <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product21.jpg" class="card-img-top" alt="Product 5">
-        <div class="card-body">
-          <h6 class="card-title">Decorative Art</h6>
-          <p class="text-success fw-bold">₹459</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 22 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product22.webp" class="card-img-top" alt="Product 6">
-        <div class="card-body">
-          <h6 class="card-title">Jute Bag</h6>
-          <p class="text-success fw-bold">₹349</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 23 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product23.jpg" class="card-img-top" alt="Product 7">
-        <div class="card-body">
-          <h6 class="card-title">Woolen Socks</h6>
-          <p class="text-success fw-bold">₹149</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 24 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product24.jpg" class="card-img-top" alt="Product 8">
-        <div class="card-body">
-          <h6 class="card-title">Bamboo Basket</h6>
-          <p class="text-success fw-bold">₹279</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 25 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product25.jpg" class="card-img-top" alt="Product 9">
-        <div class="card-body">
-          <h6 class="card-title">Copper Bottle</h6>
-          <p class="text-success fw-bold">₹599</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 26 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product26.webp" class="card-img-top" alt="Product 10">
-        <div class="card-body">
-          <h6 class="card-title">Organic Tea</h6>
-          <p class="text-success fw-bold">₹199</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Product 27 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product27.jpeg" class="card-img-top" alt="Product 1">
-        <div class="card-body">
-          <h6 class="card-title">Organic Honey</h6>
-          <p class="text-success fw-bold">₹299</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 28 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="./images/trending-products/product28.jpg" class="card-img-top" alt="Product 2">
-        <div class="card-body">
-          <h6 class="card-title">Wooden Handicraft</h6>
-          <p class="text-success fw-bold">₹799</p>
-          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-
-
+    <?php } ?>
   </div>
 </div>
+
 
 <!-- About Section -->
 <section class="py-5 bg-light" id="about">

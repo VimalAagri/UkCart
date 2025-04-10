@@ -1,3 +1,9 @@
+<?php
+session_start();
+include '../includes/db.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +22,7 @@
 
 <!-- Header -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
+  <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img src="../logo.jpg" alt="ukCart Logo" 
            class="rounded shadow" 
@@ -28,12 +34,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="./pages/shop.php">Shop</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Cart</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../index.php">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="../pages/shop.php">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="../pages/cart.php">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="../pages/login.php">Login</a></li>
       </ul>
     </div>
+    <a class="btn btn-info ms-5" href="../pages/registration.php">Register</a>
   </div>
 </nav>
 
@@ -63,124 +70,244 @@
 
 </nav>
 
+<script>
+    function addToCart(productId, productName, productPrice, productImage) {
+        const isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+
+        if (!isLoggedIn) {
+            alert("Please login first to buy a product.");
+            window.location.href = "login.php"; // login page ka actual path
+            return;
+        }
+
+        const cartItem = {
+            id: productId,
+            name: productName,
+            price: productPrice,
+            image: productImage
+        };
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(cartItem);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert("Product added to cart!");
+    }
+</script>
+
 
 <!-- Clothes -->
-<div id="#Food Items" class="container py-5">
-  <h2 class="mb-4 ">Uttarakhand Dresses</h2>
+<?php
+$sql = "SELECT * FROM clothes";
+$result = mysqli_query($conn, $sql);
+?>
+
+<div class="container py-5">
+  <h2 class="mb-4 text-center">Uttarakhand Styles</h2>
   <div class="row g-4">
+    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100">
+        <img src="../images/clothes/<?= $row['product_image'] ?>" class="card-img-top" alt="<?= $row['product_name'] ?>" style="height: 200px; object-fit: cover;">
 
-    <!-- Product 1 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-        <img src="../images/clothes/clothes1.webp"  class="card-img-top" alt="Product 1">
-        <div class="card-body">
-          <h6 class="card-title">Pichhora</h6>
-          <p class="text-success fw-bold">₹299</p>
-          <a href="#" class="btn btn-sm btn-success">Buy Now</a>
+          <div class="card-body">
+            <h5 class="card-title"><?= $row['product_name'] ?></h5>
+            <p class="text-success fw-bold">₹<?= $row['product_price'] ?></p>
+            <p class="card-text" style="font-size: 0.9rem;"><?= $row['product_description'] ?></p>
+            <a href="../pages/cart.php" class="btn btn-sm btn-primary"
+               onclick="addToCart('<?= $row['product_name'] ?>', <?= $row['product_price'] ?>, './images/clothes/<?= $row['product_image'] ?>')">Buy Now</a>
+          </div>
         </div>
       </div>
-    </div>
+    <?php } ?>
+  </div>
+</div>
 
-    <!-- Product 2 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="../images/clothes/clothes2.jpg" class="card-img-top" alt="Product 2">
-        <div class="card-body">
-          <h6 class="card-title">Uttarakhand Dress</h6>
-          <p class="text-success fw-bold">₹799</p>
-          <a href="#" class="btn btn-sm btn-success">Buy Now</a>
+<!-- Food Items -->
+<?php
+$sql = "SELECT * FROM food_items";
+$result = mysqli_query($conn, $sql);
+?>
+
+<div class="container py-5">
+  <h2 class="mb-4 text-center">Food Items</h2>
+  <div class="row g-4">
+    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100">
+        <img src="../images/food items/<?= $row['product_image'] ?>" class="card-img-top" alt="<?= $row['product_name'] ?>" style="height: 200px; object-fit: cover;">
+
+          <div class="card-body">
+            <h5 class="card-title"><?= $row['product_name'] ?></h5>
+            <p class="text-success fw-bold">₹<?= $row['product_price'] ?></p>
+            <p class="card-text" style="font-size: 0.9rem;"><?= $row['product_description'] ?></p>
+            <a href="../pages/cart.php" class="btn btn-sm btn-primary"
+               onclick="addToCart('<?= $row['product_name'] ?>', <?= $row['product_price'] ?>, './images/food items/<?= $row['product_image'] ?>')">Buy Now</a>
+          </div>
         </div>
       </div>
-    </div>
+    <?php } ?>
+  </div>
+</div>
 
-    <!-- Product 3 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="../images/clothes/clothes3.jpg" class="card-img-top" alt="Product 3">
-        <div class="card-body">
-          <h6 class="card-title">Traditional Shawl</h6>
-          <p class="text-success fw-bold">₹999</p>
-          <a href="#" class="btn btn-sm btn-success">Buy Now</a>
+<!-- Fruits -->
+<?php
+$sql = "SELECT * FROM fruits";
+$result = mysqli_query($conn, $sql);
+?>
+
+<div class="container py-5">
+  <h2 class="mb-4 text-center">Fruits</h2>
+  <div class="row g-4">
+    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100">
+        <img src="../images/fruits/<?= $row['product_image'] ?>" class="card-img-top" alt="<?= $row['product_name'] ?>" style="height: 200px; object-fit: cover;">
+
+          <div class="card-body">
+            <h5 class="card-title"><?= $row['product_name'] ?></h5>
+            <p class="text-success fw-bold">₹<?= $row['product_price'] ?></p>
+            <p class="card-text" style="font-size: 0.9rem;"><?= $row['product_description'] ?></p>
+            <a href="../pages/cart.php" class="btn btn-sm btn-primary"
+               onclick="addToCart('<?= $row['product_name'] ?>', <?= $row['product_price'] ?>, './images/fruits/<?= $row['product_image'] ?>')">Buy Now</a>
+          </div>
         </div>
       </div>
-    </div>
+    <?php } ?>
+  </div>
+</div>
 
-    <!-- Product 4 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="../images/clothes/clothes4.jpg" class="card-img-top" alt="Product 4">
-        <div class="card-body">
-          <h6 class="card-title">Organic Pulses</h6>
-          <p class="text-success fw-bold">₹129</p>
-          <a href="#" class="btn btn-sm btn-success">Buy Now</a>
+<!-- Handicrafts -->
+<?php
+$sql = "SELECT * FROM handicrafts";
+$result = mysqli_query($conn, $sql);
+?>
+
+<div class="container py-5">
+  <h2 class="mb-4 text-center">Handicrafts</h2>
+  <div class="row g-4">
+    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100">
+        <img src="../images/handicrafts/<?= $row['product_image'] ?>" class="card-img-top" alt="<?= $row['product_name'] ?>" style="height: 200px; object-fit: cover;">
+
+          <div class="card-body">
+            <h5 class="card-title"><?= $row['product_name'] ?></h5>
+            <p class="text-success fw-bold">₹<?= $row['product_price'] ?></p>
+            <p class="card-text" style="font-size: 0.9rem;"><?= $row['product_description'] ?></p>
+            <a href="../pages/cart.php" class="btn btn-sm btn-primary"
+               onclick="addToCart('<?= $row['product_name'] ?>', <?= $row['product_price'] ?>, './images/handicrafts/<?= $row['product_image'] ?>')">Buy Now</a>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- Product 5 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="../images/clothes/clothes5.jpg" class="card-img-top" alt="Product 5">
-        <div class="card-body">
-          <h6 class="card-title">Decorative Art</h6>
-          <p class="text-success fw-bold">₹459</p>
-          <a href="#" class="btn btn-sm btn-success">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 6 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="../images/clothes/clothes6.webp" class="card-img-top" alt="Product 6">
-        <div class="card-body">
-          <h6 class="card-title">Jute Bag</h6>
-          <p class="text-success fw-bold">₹349</p>
-          <a href="#" class="btn btn-sm btn-success">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 7 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="../images/clothes/clothes7.jpg" class="card-img-top" alt="Product 7">
-        <div class="card-body">
-          <h6 class="card-title">Woolen Socks</h6>
-          <p class="text-success fw-bold">₹149</p>
-          <a href="#" class="btn btn-sm btn-success">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 8 -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100">
-      <img src="../images/clothes/clothes8.jpg" class="card-img-top" alt="Product 8">
-        <div class="card-body">
-          <h6 class="card-title">Bamboo Basket</h6>
-          <p class="text-success fw-bold">₹279</p>
-          <a href="#" class="btn btn-sm btn-success">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-   
-
-
+    <?php } ?>
   </div>
 </div>
 
 
+<!-- Jewellery -->
+<?php
+$sql = "SELECT * FROM jewellery";
+$result = mysqli_query($conn, $sql);
+?>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3">
-        <p class="mb-0">&copy; <?php echo date("Y"); ?> MyStore. All rights reserved.</p>
-    </footer>
+<div class="container py-5">
+  <h2 class="mb-4 text-center">Jewellery</h2>
+  <div class="row g-4">
+    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100">
+        <img src="../images/jewellery/<?= $row['product_image'] ?>" class="card-img-top" alt="<?= $row['product_name'] ?>" style="height: 200px; object-fit: cover;">
 
-</body>
-</html>
+          <div class="card-body">
+            <h5 class="card-title"><?= $row['product_name'] ?></h5>
+            <p class="text-success fw-bold">₹<?= $row['product_price'] ?></p>
+            <p class="card-text" style="font-size: 0.9rem;"><?= $row['product_description'] ?></p>
+            <a href="../pages/cart.php" class="btn btn-sm btn-primary"
+               onclick="addToCart('<?= $row['product_name'] ?>', <?= $row['product_price'] ?>, './images/jewellery/<?= $row['product_image'] ?>')">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
+  </div>
+</div>
 
+<!-- Plants -->
+<?php
+$sql = "SELECT * FROM plants";
+$result = mysqli_query($conn, $sql);
+?>
 
+<div class="container py-5">
+  <h2 class="mb-4 text-center">Plants</h2>
+  <div class="row g-4">
+    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100">
+        <img src="../images/plants/<?= $row['product_image'] ?>" class="card-img-top" alt="<?= $row['product_name'] ?>" style="height: 200px; object-fit: cover;">
 
+          <div class="card-body">
+            <h5 class="card-title"><?= $row['product_name'] ?></h5>
+            <p class="text-success fw-bold">₹<?= $row['product_price'] ?></p>
+            <p class="card-text" style="font-size: 0.9rem;"><?= $row['product_description'] ?></p>
+            <a href="../pages/cart.php" class="btn btn-sm btn-primary"
+               onclick="addToCart('<?= $row['product_name'] ?>', <?= $row['product_price'] ?>, './images/plants/<?= $row['product_image'] ?>')">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
+  </div>
+</div>
 
+<!-- Pulses -->
+<?php
+$sql = "SELECT * FROM pulses";
+$result = mysqli_query($conn, $sql);
+?>
+
+<div class="container py-5">
+  <h2 class="mb-4 text-center">Pulses</h2>
+  <div class="row g-4">
+    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100">
+        <img src="../images/pulses/<?= $row['product_image'] ?>" class="card-img-top" alt="<?= $row['product_name'] ?>" style="height: 200px; object-fit: cover;">
+
+          <div class="card-body">
+            <h5 class="card-title"><?= $row['product_name'] ?></h5>
+            <p class="text-success fw-bold">₹<?= $row['product_price'] ?></p>
+            <p class="card-text" style="font-size: 0.9rem;"><?= $row['product_description'] ?></p>
+            <a href="../pages/cart.php" class="btn btn-sm btn-primary"
+               onclick="addToCart('<?= $row['product_name'] ?>', <?= $row['product_price'] ?>, './images/pulses/<?= $row['product_image'] ?>')">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
+  </div>
+</div>
+
+<!-- Temples -->
+<?php
+$sql = "SELECT * FROM temples";
+$result = mysqli_query($conn, $sql);
+?>
+
+<div class="container py-5">
+  <h2 class="mb-4 text-center">Tample's Parsad</h2>
+  <div class="row g-4">
+    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100">
+        <img src="../images/temples/<?= $row['product_image'] ?>" class="card-img-top" alt="<?= $row['product_name'] ?>" style="height: 200px; object-fit: cover;">
+
+          <div class="card-body">
+            <h5 class="card-title"><?= $row['product_name'] ?></h5>
+            <p class="text-success fw-bold">₹<?= $row['product_price'] ?></p>
+            <p class="card-text" style="font-size: 0.9rem;"><?= $row['product_description'] ?></p>
+            <a href="../pages/cart.php" class="btn btn-sm btn-primary"
+               onclick="addToCart('<?= $row['product_name'] ?>', <?= $row['product_price'] ?>, './images/temples/<?= $row['product_image'] ?>')">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
+  </div>
+</div>
