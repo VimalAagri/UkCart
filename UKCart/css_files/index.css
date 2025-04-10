@@ -1,0 +1,23 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+html,body{
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+  
+.carousel-inner img {
+    height: 95vh; /* desired height */
+    object-fit: cover;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
