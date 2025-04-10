@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My eCommerce Store</title>
-
+    <title>UkCart</title>
+    <link rel="icon" href="logo.jpg" type="image/jpeg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
@@ -29,7 +29,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="./pages/shop.php">Shop</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Cart</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
       </ul>
@@ -99,7 +99,7 @@
     <!-- Product 1 -->
     <div class="col-md-3 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/arts.jpg" class="card-img-top" alt="Arts">
+        <img src="./images/products-category/products1.webp" class="card-img-top" alt="Arts">
         <div class="card-body">
           <p class="card-text">Beautiful traditional art pieces from local artisans.</p>
         </div>
@@ -109,7 +109,7 @@
     <!-- Product 2 -->
     <div class="col-md-3 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/food_items.jpg" class="card-img-top" alt="Food Items">
+        <img src="./images/products-category/products2.jpg" class="card-img-top" alt="Food Items">
         <div class="card-body">
           <p class="card-text">Organic and homemade food items straight from the hills.</p>
         </div>
@@ -119,7 +119,7 @@
     <!-- Product 3 -->
     <div class="col-md-3 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/handicraft.jpg" class="card-img-top" alt="Handicraft">
+        <img src="./images/products-category/products3.jpg" class="card-img-top" alt="Handicraft">
         <div class="card-body">
           <p class="card-text">Handcrafted treasures made with care and tradition.</p>
         </div>
@@ -129,7 +129,7 @@
     <!-- Product 4 -->
     <div class="col-md-3 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/handmade_products.jpg" class="card-img-top" alt="Handmade">
+        <img src="./images/products-category/products4.jpg" class="card-img-top" alt="Handmade">
         <div class="card-body">
           <p class="card-text">Premium handmade products, crafted by local hands.</p>
         </div>
@@ -139,7 +139,7 @@
     <!-- Product 5 -->
     <div class="col-md-3 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/pulses.jpg" class="card-img-top" alt="Pulses">
+        <img src="./images/products-category/products5.jpg" class="card-img-top" alt="Pulses">
         <div class="card-body">
           <p class="card-text">Nutritious pulses sourced from sustainable farms.</p>
         </div>
@@ -149,7 +149,7 @@
     <!-- Product 6 -->
     <div class="col-md-3 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/parsad.jpg" class="card-img-top" alt="Food Items">
+        <img src="./images/products-category/products6.jpg" class="card-img-top" alt="Food Items">
         <div class="card-body">
           <p class="card-text">Delicious and healthy parsad.</p>
         </div>
@@ -159,7 +159,7 @@
     <!-- Product 7 -->
     <div class="col-md-3 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/handicraft.jpg" class="card-img-top" alt="Handicraft">
+        <img src="./images/products-category/products7.jpg" class="card-img-top" alt="Handicraft">
         <div class="card-body">
           <p class="card-text">Traditional handicrafts to enrich your home decor.</p>
         </div>
@@ -169,7 +169,7 @@
     <!-- Product 8 -->
     <div class="col-md-3 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/handmade_products.jpg" class="card-img-top" alt="Handmade">
+        <img src="./images/products-category/products8.webp" class="card-img-top" alt="Handmade">
         <div class="card-body">
           <p class="card-text">Locally sourced handmade goodness at its best.</p>
         </div>
@@ -191,9 +191,9 @@
     <!-- Product 1 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product1.jpg" class="card-img-top" alt="Product 1">
+        <img src="./images/trending-products/product1.jpg"  class="card-img-top" alt="Product 1">
         <div class="card-body">
-          <h6 class="card-title">Organic Honey</h6>
+          <h6 class="card-title">Pichhora</h6>
           <p class="text-success fw-bold">₹299</p>
           <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
         </div>
@@ -203,9 +203,9 @@
     <!-- Product 2 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product2.jpg" class="card-img-top" alt="Product 2">
+      <img src="./images/trending-products/product2.jpg" class="card-img-top" alt="Product 2">
         <div class="card-body">
-          <h6 class="card-title">Wooden Handicraft</h6>
+          <h6 class="card-title">Uttarakhand Dress</h6>
           <p class="text-success fw-bold">₹799</p>
           <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
         </div>
@@ -215,7 +215,7 @@
     <!-- Product 3 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product3.jpg" class="card-img-top" alt="Product 3">
+      <img src="./images/trending-products/product3.jpg" class="card-img-top" alt="Product 3">
         <div class="card-body">
           <h6 class="card-title">Traditional Shawl</h6>
           <p class="text-success fw-bold">₹999</p>
@@ -227,7 +227,7 @@
     <!-- Product 4 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product4.jpg" class="card-img-top" alt="Product 4">
+      <img src="./images/trending-products/product4.webp" class="card-img-top" alt="Product 4">
         <div class="card-body">
           <h6 class="card-title">Organic Pulses</h6>
           <p class="text-success fw-bold">₹129</p>
@@ -239,7 +239,7 @@
     <!-- Product 5 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product5.jpg" class="card-img-top" alt="Product 5">
+      <img src="./images/trending-products/product5.webp" class="card-img-top" alt="Product 5">
         <div class="card-body">
           <h6 class="card-title">Decorative Art</h6>
           <p class="text-success fw-bold">₹459</p>
@@ -251,7 +251,7 @@
     <!-- Product 6 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product6.jpg" class="card-img-top" alt="Product 6">
+      <img src="./images/trending-products/product6.jpg" class="card-img-top" alt="Product 6">
         <div class="card-body">
           <h6 class="card-title">Jute Bag</h6>
           <p class="text-success fw-bold">₹349</p>
@@ -263,7 +263,7 @@
     <!-- Product 7 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product7.jpg" class="card-img-top" alt="Product 7">
+      <img src="./images/trending-products/product7.webp" class="card-img-top" alt="Product 7">
         <div class="card-body">
           <h6 class="card-title">Woolen Socks</h6>
           <p class="text-success fw-bold">₹149</p>
@@ -275,7 +275,7 @@
     <!-- Product 8 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product8.jpg" class="card-img-top" alt="Product 8">
+      <img src="./images/trending-products/product8.jpg" class="card-img-top" alt="Product 8">
         <div class="card-body">
           <h6 class="card-title">Bamboo Basket</h6>
           <p class="text-success fw-bold">₹279</p>
@@ -287,7 +287,7 @@
     <!-- Product 9 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product9.jpg" class="card-img-top" alt="Product 9">
+      <img src="./images/trending-products/product9.jpg" class="card-img-top" alt="Product 9">
         <div class="card-body">
           <h6 class="card-title">Copper Bottle</h6>
           <p class="text-success fw-bold">₹599</p>
@@ -299,7 +299,7 @@
     <!-- Product 10 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product10.jpg" class="card-img-top" alt="Product 10">
+      <img src="./images/trending-products/product10.jpg" class="card-img-top" alt="Product 10">
         <div class="card-body">
           <h6 class="card-title">Organic Tea</h6>
           <p class="text-success fw-bold">₹199</p>
@@ -312,7 +312,7 @@
     <!-- Product 11 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product1.jpg" class="card-img-top" alt="Product 1">
+      <img src="./images/trending-products/product11.jpg" class="card-img-top" alt="Product 1">
         <div class="card-body">
           <h6 class="card-title">Organic Honey</h6>
           <p class="text-success fw-bold">₹299</p>
@@ -324,7 +324,7 @@
     <!-- Product 12 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product2.jpg" class="card-img-top" alt="Product 2">
+      <img src="./images/trending-products/product12.jpg" class="card-img-top" alt="Product 2">
         <div class="card-body">
           <h6 class="card-title">Wooden Handicraft</h6>
           <p class="text-success fw-bold">₹799</p>
@@ -336,7 +336,7 @@
     <!-- Product 13 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product3.jpg" class="card-img-top" alt="Product 3">
+      <img src="./images/trending-products/product13.jpg" class="card-img-top" alt="Product 3">
         <div class="card-body">
           <h6 class="card-title">Traditional Shawl</h6>
           <p class="text-success fw-bold">₹999</p>
@@ -348,7 +348,7 @@
     <!-- Product 14 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product4.jpg" class="card-img-top" alt="Product 4">
+      <img src="./images/trending-products/product14.jpg" class="card-img-top" alt="Product 4">
         <div class="card-body">
           <h6 class="card-title">Organic Pulses</h6>
           <p class="text-success fw-bold">₹129</p>
@@ -360,7 +360,7 @@
     <!-- Product 15 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product5.jpg" class="card-img-top" alt="Product 5">
+      <img src="./images/trending-products/product15.webp" class="card-img-top" alt="Product 5">
         <div class="card-body">
           <h6 class="card-title">Decorative Art</h6>
           <p class="text-success fw-bold">₹459</p>
@@ -372,7 +372,7 @@
     <!-- Product 16 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product6.jpg" class="card-img-top" alt="Product 6">
+      <img src="./images/trending-products/product16.jpg" class="card-img-top" alt="Product 6">
         <div class="card-body">
           <h6 class="card-title">Jute Bag</h6>
           <p class="text-success fw-bold">₹349</p>
@@ -384,7 +384,7 @@
     <!-- Product 17 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product7.jpg" class="card-img-top" alt="Product 7">
+      <img src="./images/trending-products/product17.webp" class="card-img-top" alt="Product 7">
         <div class="card-body">
           <h6 class="card-title">Woolen Socks</h6>
           <p class="text-success fw-bold">₹149</p>
@@ -396,7 +396,7 @@
     <!-- Product 18 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product8.jpg" class="card-img-top" alt="Product 8">
+      <img src="./images/trending-products/product18.jpg" class="card-img-top" alt="Product 8">
         <div class="card-body">
           <h6 class="card-title">Bamboo Basket</h6>
           <p class="text-success fw-bold">₹279</p>
@@ -408,7 +408,7 @@
     <!-- Product 19 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product9.jpg" class="card-img-top" alt="Product 9">
+      <img src="./images/trending-products/product19.jpg" class="card-img-top" alt="Product 9">
         <div class="card-body">
           <h6 class="card-title">Copper Bottle</h6>
           <p class="text-success fw-bold">₹599</p>
@@ -420,7 +420,7 @@
     <!-- Product 20 -->
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="card h-100">
-        <img src="./images/products/product10.jpg" class="card-img-top" alt="Product 10">
+      <img src="./images/trending-products/product20.jpg" class="card-img-top" alt="Product 10">
         <div class="card-body">
           <h6 class="card-title">Organic Tea</h6>
           <p class="text-success fw-bold">₹199</p>
@@ -428,6 +428,105 @@
         </div>
       </div>
     </div>
+
+
+     <!-- Product 21 -->
+     <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card h-100">
+      <img src="./images/trending-products/product21.jpg" class="card-img-top" alt="Product 5">
+        <div class="card-body">
+          <h6 class="card-title">Decorative Art</h6>
+          <p class="text-success fw-bold">₹459</p>
+          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 22 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card h-100">
+      <img src="./images/trending-products/product22.webp" class="card-img-top" alt="Product 6">
+        <div class="card-body">
+          <h6 class="card-title">Jute Bag</h6>
+          <p class="text-success fw-bold">₹349</p>
+          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 23 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card h-100">
+      <img src="./images/trending-products/product23.jpg" class="card-img-top" alt="Product 7">
+        <div class="card-body">
+          <h6 class="card-title">Woolen Socks</h6>
+          <p class="text-success fw-bold">₹149</p>
+          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 24 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card h-100">
+      <img src="./images/trending-products/product24.jpg" class="card-img-top" alt="Product 8">
+        <div class="card-body">
+          <h6 class="card-title">Bamboo Basket</h6>
+          <p class="text-success fw-bold">₹279</p>
+          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 25 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card h-100">
+      <img src="./images/trending-products/product25.jpg" class="card-img-top" alt="Product 9">
+        <div class="card-body">
+          <h6 class="card-title">Copper Bottle</h6>
+          <p class="text-success fw-bold">₹599</p>
+          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 26 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card h-100">
+      <img src="./images/trending-products/product26.webp" class="card-img-top" alt="Product 10">
+        <div class="card-body">
+          <h6 class="card-title">Organic Tea</h6>
+          <p class="text-success fw-bold">₹199</p>
+          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Product 27 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card h-100">
+      <img src="./images/trending-products/product27.jpeg" class="card-img-top" alt="Product 1">
+        <div class="card-body">
+          <h6 class="card-title">Organic Honey</h6>
+          <p class="text-success fw-bold">₹299</p>
+          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 28 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card h-100">
+      <img src="./images/trending-products/product28.jpg" class="card-img-top" alt="Product 2">
+        <div class="card-body">
+          <h6 class="card-title">Wooden Handicraft</h6>
+          <p class="text-success fw-bold">₹799</p>
+          <a href="#" class="btn btn-sm btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </div>
+
 
 
   </div>
