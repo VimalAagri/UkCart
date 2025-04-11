@@ -11,7 +11,6 @@ $number = $_SESSION['user_number'];
 $success = "";
 $error = "";
 
-// Get user data
 $stmt = $conn->prepare("SELECT * FROM users WHERE number = ?");
 $stmt->bind_param("s", $number);
 $stmt->execute();
@@ -19,19 +18,17 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 $stmt->close();
 
-// Update logic
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newPassword = trim($_POST['password']);
-    $newAddress = trim($_POST['address']);
+    $newAddress = trim($_POST['delivery_address']);
 
-    $updateStmt = $conn->prepare("UPDATE users SET password = ?, address = ? WHERE number = ?");
+    $updateStmt = $conn->prepare("UPDATE users SET password = ?, delivery_address = ? WHERE number = ?");
     $updateStmt->bind_param("sss", $newPassword, $newAddress, $number);
 
     if ($updateStmt->execute()) {
         $success = "✅ Profile updated successfully!";
-        // Refresh updated user data
         $user['password'] = $newPassword;
-        $user['address'] = $newAddress;
+        $user['delivery_address'] = $newAddress;
     } else {
         $error = "❌ Update failed: " . $updateStmt->error;
     }
@@ -45,38 +42,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <title>User Profile</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+    }
+    .card {
+      background-color: #1e1e1e;
+      border: 1px solid #2c2c2c;
+      box-shadow: 0 0 10px rgba(255,255,255,0.05);
+    }
+    .form-control, textarea {
+      background-color: #2c2c2c;
+      color: #ffffff;
+      border: 1px solid #444;
+    }
+    p{
+
+      color: #ffffff;
+
+    }
+
+    .form-control:focus {
+      background-color: #333;
+      border-color: #5c9eff;
+      box-shadow: none;
+      color: #fff;
+    }
+    .btn-primary {
+      background-color: #5c9eff;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #3a7be0;
+    }
+    .btn-danger {
+      background-color: #e74c3c;
+      border: none;
+    }
+    .btn-danger:hover {
+      background-color: #c0392b;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Header -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="../logo.jpg" alt="ukCart Logo" 
-           class="rounded shadow" 
-           style="height: 50px; width: auto;">
-      UkCart
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link active" href="../index.php">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="../pages/shop.php">Shop</a></li>
-        <li class="nav-item"><a class="nav-link" href="../pages/cart.php">Cart</a></li>
-        <li class="nav-item"><a class="nav-link" href="../pages/login.php">Login</a></li>
-      </ul>
-    </div>
-    <a class="btn btn-info ms-5" href="../pages/registration.php">Register</a>
-  </div>
-</nav>
+<?php include "../includes/header.php" ?>
 
 <div class="container mt-5">
-  <div class="card mx-auto" style="max-width: 600px;">
+  <div class="card mx-auto p-4" style="max-width: 600px;">
     <div class="card-body">
-      <h3 class="card-title text-center">👤 User Profile</h3>
+      <h3 class="card-title text-center mb-4 text-light">👤 User Profile</h3>
 
       <?php if ($success): ?><div class="alert alert-success"><?= $success ?></div><?php endif; ?>
       <?php if ($error): ?><div class="alert alert-danger"><?= $error ?></div><?php endif; ?>
@@ -85,24 +103,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <p><strong>👤 Name:</strong> <?= htmlspecialchars($user['name']) ?></p>
       <p><strong>📧 Email:</strong> <?= htmlspecialchars($user['email']) ?></p>
 
-      <!-- Editable Fields -->
       <form method="POST">
         <div class="mb-3">
-          <label for="password" class="form-label">🔐 Password</label>
+          <label for="password" class="form-label text-light">🔐 Password</label>
           <input type="text" name="password" id="password" class="form-control" value="<?= htmlspecialchars($user['password']) ?>" required>
         </div>
 
         <div class="mb-3">
-          <label for="address" class="form-label">🏠 Address</label>
-          <textarea name="address" id="address" class="form-control" required><?= htmlspecialchars($user['address']) ?></textarea>
+          <label for="delivery_address" class="form-label text-light">🏠 Address</label>
+          <textarea name="delivery_address" id="delivery_address" class="form-control" rows="3" required><?= htmlspecialchars($user['delivery_address']) ?></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">💾 Save Changes</button>
+        <button type="submit" class="btn btn-primary w-100">💾 Save Changes</button>
       </form>
 
-      <a href="../index.php" class="btn btn-danger mt-3">🚪 Logout</a>
+      <a href="../pages/logout.php" class="btn btn-danger w-100 mt-3">🚪 Logout</a>
     </div>
   </div>
 </div>
+
+<?php include "../includes/footer.php" ?>
+
 </body>
 </html>
