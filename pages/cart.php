@@ -3,6 +3,11 @@ session_start();
 include '../includes/db.php';
 
 if (!isset($_SESSION['user_number'])) {
+  header("Location: login.php");
+  exit;
+}
+
+if (!isset($_SESSION['user_number'])) {
   echo '<script>
     document.addEventListener("DOMContentLoaded", function () {
       const loginForceModal = new bootstrap.Modal(document.getElementById("loginForceModal"), {
