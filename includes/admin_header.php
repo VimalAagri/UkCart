@@ -1,8 +1,8 @@
-<section>
+<section >
 <?php
 $current_page = basename($_SERVER['SCRIPT_NAME']);
-$logged_in = isset($_SESSION['user_number']);
-$user_name = $_SESSION['user_name'] ?? 'User';
+$logged_in = isset($_SESSION['admin_name']); 
+$user_name = $_SESSION['admin_name'] ?? 'User'; 
 ?>
 
 <!-- Bootstrap Icons  -->
@@ -56,6 +56,8 @@ $user_name = $_SESSION['user_name'] ?? 'User';
         <li class="nav-item">
         <a class="nav-link btn btn-sm rounded-pill px-3 py-1 <?= $current_page == 'shop.php' ? 'btn-primary text-white' : 'btn-outline-primary' ?>" href="../pages/shop.php">Shop</a>
         </li>
+        
+        
         <!-- Right Side: Admin Login / Logout -->
         <ul class="navbar-nav ms-auto gap-2">
         <?php if ($logged_in): ?>
@@ -68,12 +70,19 @@ $user_name = $_SESSION['user_name'] ?? 'User';
         <?php else: ?>
             <!-- ✅ Admin Login Button -->
             <li class="nav-item">
-            <a class="nav-link btn btn-sm rounded-pill px-3 py-1 <?= $current_page == 'login.php' ? 'btn-light text-dark' : 'btn-outline-light' ?>" href="../pages/login.php">
+            <a class="nav-link btn btn-sm rounded-pill px-3 py-1 <?= $current_page == 'login.php' ? 'btn-light text-dark' : 'btn-outline-info' ?>" href="../pages/login.php">
                 <i class="bi bi-box-arrow-in-right"></i> Admin Login
             </a>
             </li>
         <?php endif; ?>
         </ul>
+
+        <style>
+  .btn-outline-light:hover {
+    background-color: transparent !important; /* Background transparent rakho */
+    color: #fff !important; /* Text ka color jo tum chahte ho, wo set karo */
+  }
+</style>
 
     </div>
   </div>

@@ -96,7 +96,7 @@ $user_name = $_SESSION['user_name'] ?? 'User';
           </li>
         <?php else: ?>
           <li class="nav-item">
-            <a class="nav-link btn btn-sm rounded-pill px-3 py-1 <?= $current_page == 'login.php' ? 'btn-light text-dark' : 'btn-outline-light' ?>" href="../pages/login.php">Login</a>
+            <a class="nav-link btn btn-sm rounded-pill px-3 py-1 <?= $current_page == 'login.php' ? 'btn-light text-dark' : 'btn-outline-info' ?>" href="../pages/login.php">Login</a>
           </li>
           <li class="nav-item">
             <a class="btn btn-sm btn-info rounded-pill px-4 fw-bold" href="../pages/registration.php">Register</a>
@@ -157,6 +157,7 @@ $user_name = $_SESSION['user_name'] ?? 'User';
     padding-left: 10px;
     opacity: 0.85;
   }
+
 
   
 </style>
